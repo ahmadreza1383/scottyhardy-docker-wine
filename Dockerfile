@@ -1,8 +1,16 @@
-### Initializing
 FROM scottyhardy/docker-wine:latest
 
-RUN apt update -y
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt install winetricks -y
+RUN apt update && apt install -y \
+    winetricks \
+    cabextract \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
 
-winetricks dxvk
+ENV WINEARCH=win32
+ENV WINEPREFIX=/wine32
+
+RUN wineboot --init
+
+RUN winetricks -q dxvk
