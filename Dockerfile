@@ -1,9 +1,11 @@
-### Initilizing
+### Initializing
 FROM scottyhardy/docker-wine:latest
 
-RUN apt update -y
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DISPLAY=:99
 
-### Winetricks
-RUN apt install winetricks -y
+RUN apt update -y && \
+    apt install -y winetricks xvfb
 
-RUN winetricks corefonts vcrun6 comctl32
+### Run winetricks with virtual X server
+RUN xvfb-run -a winetricks corefonts vcrun6 comctl32
