@@ -5,13 +5,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
     winetricks \
     cabextract \
-    unrar \
     unzip \
     mesa-utils \
+    libgl1 \
     libgl1-mesa-dri \
-    libgl1-mesa-glx \
     libvulkan1 \
-    vulkan-utils \
+    vulkan-tools \
     libegl1 \
     && rm -rf /var/lib/apt/lists/*
 
